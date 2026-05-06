@@ -1,0 +1,31 @@
+name: "Verdex CI Energy Monitor"
+description: "Collect CI telemetry and report energy metrics to Verdex for scoring and badge generation."
+author: "Verdex"
+
+branding:
+  icon: "activity"
+  color: "green"
+
+inputs:
+  api-key:
+    description: "Repository API key from the Verdex dashboard (Settings → API Keys)."
+    required: true
+  api-url:
+    description: "Verdex API base URL. Override for self-hosted deployments."
+    required: false
+    default: "https://api.verdex.dev"
+  collect-network:
+    description: "Whether to collect network I/O metrics from /proc/net/dev (Linux only)."
+    required: false
+    default: "true"
+
+outputs:
+  report-url:
+    description: "URL to the Verdex analysis report generated from this run."
+
+runs:
+  using: "node20"
+  # main: runs at the start of the job (before user steps) — intentionally empty
+  # post: runs after all user steps complete without blocking the build
+  post: "dist/index.js"
+  post-if: "always()"
