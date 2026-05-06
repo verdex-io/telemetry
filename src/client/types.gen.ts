@@ -557,6 +557,23 @@ export type NewPassword = {
 };
 
 /**
+ * OAuthCodeExchange
+ * Body for both /exchange and /link — the authorization code + the exact
+ * redirect_uri used when opening the provider consent screen (required by
+ * most providers to validate the code exchange).
+ */
+export type OAuthCodeExchange = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Redirect Uri
+     */
+    redirect_uri: string;
+};
+
+/**
  * OAuthConnectionPublic
  */
 export type OAuthConnectionPublic = {
@@ -619,6 +636,26 @@ export type OAuthConnectionsPublic = {
      * Count
      */
     count: number;
+};
+
+/**
+ * OAuthExchangeResponse
+ */
+export type OAuthExchangeResponse = {
+    /**
+     * Access Token
+     */
+    access_token: string;
+};
+
+/**
+ * OAuthLinkResponse
+ */
+export type OAuthLinkResponse = {
+    /**
+     * Provider Username
+     */
+    provider_username: string;
 };
 
 /**
@@ -2043,99 +2080,59 @@ export type UtilsHealthCheckResponses = {
 
 export type UtilsHealthCheckResponse = UtilsHealthCheckResponses[keyof UtilsHealthCheckResponses];
 
-export type OauthProviderLoginData = {
-    body?: never;
+export type OauthProviderExchangeData = {
+    body: OAuthCodeExchange;
     path: {
         provider: GitProvider;
     };
     query?: never;
-    url: '/api/v1/oauth/{provider}/login';
+    url: '/api/v1/oauth/{provider}/exchange';
 };
 
-export type OauthProviderLoginErrors = {
+export type OauthProviderExchangeErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type OauthProviderLoginError = OauthProviderLoginErrors[keyof OauthProviderLoginErrors];
+export type OauthProviderExchangeError = OauthProviderExchangeErrors[keyof OauthProviderExchangeErrors];
 
-export type OauthProviderLoginResponses = {
+export type OauthProviderExchangeResponses = {
     /**
-     * Response Oauth-Provider Login
      * Successful Response
      */
-    200: {
-        [key: string]: string;
-    };
+    200: OAuthExchangeResponse;
 };
 
-export type OauthProviderLoginResponse = OauthProviderLoginResponses[keyof OauthProviderLoginResponses];
+export type OauthProviderExchangeResponse = OauthProviderExchangeResponses[keyof OauthProviderExchangeResponses];
 
-export type OauthProviderAuthorizeData = {
-    body?: never;
+export type OauthProviderLinkData = {
+    body: OAuthCodeExchange;
     path: {
         provider: GitProvider;
     };
     query?: never;
-    url: '/api/v1/oauth/{provider}/authorize';
+    url: '/api/v1/oauth/{provider}/link';
 };
 
-export type OauthProviderAuthorizeErrors = {
+export type OauthProviderLinkErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type OauthProviderAuthorizeError = OauthProviderAuthorizeErrors[keyof OauthProviderAuthorizeErrors];
+export type OauthProviderLinkError = OauthProviderLinkErrors[keyof OauthProviderLinkErrors];
 
-export type OauthProviderAuthorizeResponses = {
-    /**
-     * Response Oauth-Provider Authorize
-     * Successful Response
-     */
-    200: {
-        [key: string]: string;
-    };
-};
-
-export type OauthProviderAuthorizeResponse = OauthProviderAuthorizeResponses[keyof OauthProviderAuthorizeResponses];
-
-export type OauthProviderCallbackData = {
-    body?: never;
-    path: {
-        provider: GitProvider;
-    };
-    query: {
-        /**
-         * Code
-         */
-        code: string;
-        /**
-         * State
-         */
-        state: string;
-    };
-    url: '/api/v1/oauth/{provider}/callback';
-};
-
-export type OauthProviderCallbackErrors = {
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type OauthProviderCallbackError = OauthProviderCallbackErrors[keyof OauthProviderCallbackErrors];
-
-export type OauthProviderCallbackResponses = {
+export type OauthProviderLinkResponses = {
     /**
      * Successful Response
      */
-    200: unknown;
+    200: OAuthLinkResponse;
 };
+
+export type OauthProviderLinkResponse = OauthProviderLinkResponses[keyof OauthProviderLinkResponses];
 
 export type OauthGetProviderConnectionsData = {
     body?: never;

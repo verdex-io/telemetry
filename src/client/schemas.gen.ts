@@ -803,6 +803,25 @@ export const NewPasswordSchema = {
     title: 'NewPassword'
 } as const;
 
+export const OAuthCodeExchangeSchema = {
+    properties: {
+        code: {
+            type: 'string',
+            title: 'Code'
+        },
+        redirect_uri: {
+            type: 'string',
+            title: 'Redirect Uri'
+        }
+    },
+    type: 'object',
+    required: ['code', 'redirect_uri'],
+    title: 'OAuthCodeExchange',
+    description: `Body for both /exchange and /link — the authorization code + the exact
+redirect_uri used when opening the provider consent screen (required by
+most providers to validate the code exchange).`
+} as const;
+
 export const OAuthConnectionPublicSchema = {
     properties: {
         provider: {
@@ -915,6 +934,30 @@ export const OAuthConnectionsPublicSchema = {
     type: 'object',
     required: ['data', 'count'],
     title: 'OAuthConnectionsPublic'
+} as const;
+
+export const OAuthExchangeResponseSchema = {
+    properties: {
+        access_token: {
+            type: 'string',
+            title: 'Access Token'
+        }
+    },
+    type: 'object',
+    required: ['access_token'],
+    title: 'OAuthExchangeResponse'
+} as const;
+
+export const OAuthLinkResponseSchema = {
+    properties: {
+        provider_username: {
+            type: 'string',
+            title: 'Provider Username'
+        }
+    },
+    type: 'object',
+    required: ['provider_username'],
+    title: 'OAuthLinkResponse'
 } as const;
 
 export const OSSFixRequestInSchema = {
