@@ -125,21 +125,39 @@ async function postTelemetry(apiUrl, apiKey, payload) {
     },
   };
 
-  const url = new URL('/api/v1/telemetry/ingest', apiUrl).toString();
-  const response = await globalThis.fetch(url, {
+  const url = new URL('/api/v1/telemetry/ingest', apiUrl);
+  const isHttps = url.protocol === 'https:';
+  const transport = isHttps ? require('https') : require('http');
+  const bodyStr = JSON.stringify(body);
+
+  const options = {
+    hostname: url.hostname,
+    port: url.port || (isHttps ? 443 : 80),
+    path: url.pathname + url.search,
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'X-Verdex-Api-Key': apiKey,
+      'Content-Length': Buffer.byteLength(bodyStr),
     },
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(10000),
+  };
+
+  return new Promise((resolve, reject) => {
+    const req = transport.request(options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => { data += chunk; });
+      res.on('end', () => {
+        try {
+          resolve(JSON.parse(data));
+        } catch {
+          resolve({});
+        }
+      });
+    });
+    req.on('error', reject);
+    req.write(bodyStr);
+    req.end();
   });
-  try {
-    return await response.json();
-  } catch {
-    return {};
-  }
 }
 
 // Export for unit testing; guard against accidental execution when required.
