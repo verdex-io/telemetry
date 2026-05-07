@@ -14,7 +14,6 @@
 
 const core = require('@actions/core');
 const github = require('@actions/github');
-const https = require('https');
 const fs = require('fs');
 const os = require('os');
 
@@ -104,44 +103,43 @@ function readNetworkStats() {
   }
 }
 
-function postTelemetry(apiUrl, apiKey, payload) {
-  return new Promise((resolve, reject) => {
-    const body = JSON.stringify(payload);
-    const url = new URL('/api/v1/telemetry/ingest', apiUrl);
+async function postTelemetry(apiUrl, apiKey, payload) {
+  const body = {
+    workflow_run_id: payload.workflow_run_id,
+    job_name: payload.job_name,
+    runner_os: payload.runner?.os ?? null,
+    runner_arch: payload.runner?.arch ?? null,
+    cpu_count: payload.runner?.cpu_count ?? null,
+    memory_mb: payload.runner?.total_memory_mb ?? null,
+    network_bytes_in: payload.network?.bytes_in ?? null,
+    network_bytes_out: payload.network?.bytes_out ?? null,
+    raw_data: {
+      workflow_name: payload.workflow_name,
+      run_number: payload.run_number,
+      ref: payload.ref,
+      sha: payload.sha,
+      repository: payload.repository,
+      runner_name: payload.runner?.name ?? null,
+      collected_at: payload.timing?.collected_at ?? null,
+      cache_hits: payload.cache_hits ?? {},
+    },
+  };
 
-    const options = {
-      hostname: url.hostname,
-      port: url.port || 443,
-      path: url.pathname,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(body),
-        'X-Verdex-Api-Key': apiKey,
-        'User-Agent': 'verdex-action/1.0',
-      },
-    };
-
-    const protocol = url.protocol === 'http:' ? require('http') : https;
-    const req = protocol.request(options, (res) => {
-      let data = '';
-      res.on('data', (chunk) => { data += chunk; });
-      res.on('end', () => {
-        try {
-          resolve(JSON.parse(data));
-        } catch {
-          resolve({});
-        }
-      });
-    });
-
-    req.on('error', reject);
-    req.setTimeout(10000, () => {
-      req.destroy(new Error('Verdex API request timed out'));
-    });
-    req.write(body);
-    req.end();
+  const url = new URL('/api/v1/telemetry/ingest', apiUrl).toString();
+  const response = await globalThis.fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Verdex-Api-Key': apiKey,
+    },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(10000),
   });
+  try {
+    return await response.json();
+  } catch {
+    return {};
+  }
 }
 
 // Export for unit testing; guard against accidental execution when required.
