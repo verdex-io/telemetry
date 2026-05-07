@@ -13,7 +13,7 @@ export const AIFixSuggestionPublicSchema = {
             title: 'Violation Id'
         },
         provider: {
-            '$ref': '#/components/schemas/AIProviderName'
+            $ref: '#/components/schemas/AIProviderName'
         },
         model: {
             type: 'string',
@@ -38,13 +38,27 @@ export const AIFixSuggestionPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'violation_id', 'provider', 'model', 'suggestion', 'prompt_tokens', 'completion_tokens', 'created_at'],
+    required: [
+        'id',
+        'violation_id',
+        'provider',
+        'model',
+        'suggestion',
+        'prompt_tokens',
+        'completion_tokens',
+        'created_at'
+    ],
     title: 'AIFixSuggestionPublic'
 } as const;
 
 export const AIProviderNameSchema = {
     type: 'string',
-    enum: ['openai', 'anthropic', 'google', 'ollama'],
+    enum: [
+        'openai',
+        'anthropic',
+        'google',
+        'ollama'
+    ],
     title: 'AIProviderName'
 } as const;
 
@@ -61,7 +75,7 @@ export const AnalysisReportPublicSchema = {
             title: 'Repository Id'
         },
         trigger_type: {
-            '$ref': '#/components/schemas/TriggerType'
+            $ref: '#/components/schemas/TriggerType'
         },
         trigger_ref: {
             anyOf: [
@@ -75,7 +89,7 @@ export const AnalysisReportPublicSchema = {
             title: 'Trigger Ref'
         },
         status: {
-            '$ref': '#/components/schemas/AnalysisStatus'
+            $ref: '#/components/schemas/AnalysisStatus'
         },
         total_violations: {
             type: 'integer',
@@ -138,7 +152,20 @@ export const AnalysisReportPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'repository_id', 'trigger_type', 'trigger_ref', 'status', 'total_violations', 'violations_by_severity', 'score', 'grade', 'error_message', 'started_at', 'completed_at'],
+    required: [
+        'id',
+        'repository_id',
+        'trigger_type',
+        'trigger_ref',
+        'status',
+        'total_violations',
+        'violations_by_severity',
+        'score',
+        'grade',
+        'error_message',
+        'started_at',
+        'completed_at'
+    ],
     title: 'AnalysisReportPublic'
 } as const;
 
@@ -146,7 +173,7 @@ export const AnalysisReportsPublicSchema = {
     properties: {
         data: {
             items: {
-                '$ref': '#/components/schemas/AnalysisReportPublic'
+                $ref: '#/components/schemas/AnalysisReportPublic'
             },
             type: 'array',
             title: 'Data'
@@ -157,13 +184,21 @@ export const AnalysisReportsPublicSchema = {
         }
     },
     type: 'object',
-    required: ['data', 'count'],
+    required: [
+        'data',
+        'count'
+    ],
     title: 'AnalysisReportsPublic'
 } as const;
 
 export const AnalysisStatusSchema = {
     type: 'string',
-    enum: ['pending', 'running', 'completed', 'failed'],
+    enum: [
+        'pending',
+        'running',
+        'completed',
+        'failed'
+    ],
     title: 'AnalysisStatus'
 } as const;
 
@@ -175,7 +210,9 @@ export const ApiKeyCreateInSchema = {
         }
     },
     type: 'object',
-    required: ['name'],
+    required: [
+        'name'
+    ],
     title: 'ApiKeyCreateIn'
 } as const;
 
@@ -201,7 +238,12 @@ export const ApiKeyCreatedOutSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'repository_id', 'name', 'plaintext_key'],
+    required: [
+        'id',
+        'repository_id',
+        'name',
+        'plaintext_key'
+    ],
     title: 'ApiKeyCreatedOut'
 } as const;
 
@@ -266,7 +308,16 @@ export const AuditLogPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'user_id', 'action', 'resource_type', 'resource_id', 'details', 'ip_address', 'created_at'],
+    required: [
+        'id',
+        'user_id',
+        'action',
+        'resource_type',
+        'resource_id',
+        'details',
+        'ip_address',
+        'created_at'
+    ],
     title: 'AuditLogPublic'
 } as const;
 
@@ -323,7 +374,10 @@ export const Body_login_login_access_tokenSchema = {
         }
     },
     type: 'object',
-    required: ['username', 'password'],
+    required: [
+        'username',
+        'password'
+    ],
     title: 'Body_login-login_access_token'
 } as const;
 
@@ -440,7 +494,23 @@ export const CloudAnalysisReportPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'repository_id', 'cloud_connection_id', 'analysis_type', 'platform', 'trigger_type', 'status', 'total_violations', 'violations_by_severity', 'violations_by_platform', 'score', 'grade', 'error_message', 'started_at', 'completed_at'],
+    required: [
+        'id',
+        'repository_id',
+        'cloud_connection_id',
+        'analysis_type',
+        'platform',
+        'trigger_type',
+        'status',
+        'total_violations',
+        'violations_by_severity',
+        'violations_by_platform',
+        'score',
+        'grade',
+        'error_message',
+        'started_at',
+        'completed_at'
+    ],
     title: 'CloudAnalysisReportPublic'
 } as const;
 
@@ -448,7 +518,7 @@ export const CloudAnalysisReportsPublicSchema = {
     properties: {
         data: {
             items: {
-                '$ref': '#/components/schemas/CloudAnalysisReportPublic'
+                $ref: '#/components/schemas/CloudAnalysisReportPublic'
             },
             type: 'array',
             title: 'Data'
@@ -459,7 +529,10 @@ export const CloudAnalysisReportsPublicSchema = {
         }
     },
     type: 'object',
-    required: ['data', 'count'],
+    required: [
+        'data',
+        'count'
+    ],
     title: 'CloudAnalysisReportsPublic'
 } as const;
 
@@ -480,7 +553,11 @@ export const CloudConnectionCreateSchema = {
         }
     },
     type: 'object',
-    required: ['platform', 'name', 'credentials'],
+    required: [
+        'platform',
+        'name',
+        'credentials'
+    ],
     title: 'CloudConnectionCreate'
 } as const;
 
@@ -515,7 +592,14 @@ export const CloudConnectionPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'platform', 'name', 'account_metadata', 'enabled', 'created_at'],
+    required: [
+        'id',
+        'platform',
+        'name',
+        'account_metadata',
+        'enabled',
+        'created_at'
+    ],
     title: 'CloudConnectionPublic'
 } as const;
 
@@ -523,7 +607,7 @@ export const CloudConnectionsPublicSchema = {
     properties: {
         data: {
             items: {
-                '$ref': '#/components/schemas/CloudConnectionPublic'
+                $ref: '#/components/schemas/CloudConnectionPublic'
             },
             type: 'array',
             title: 'Data'
@@ -534,7 +618,10 @@ export const CloudConnectionsPublicSchema = {
         }
     },
     type: 'object',
-    required: ['data', 'count'],
+    required: [
+        'data',
+        'count'
+    ],
     title: 'CloudConnectionsPublic'
 } as const;
 
@@ -542,7 +629,7 @@ export const CloudRulesPublicSchema = {
     properties: {
         data: {
             items: {
-                '$ref': '#/components/schemas/RegoRulePublic'
+                $ref: '#/components/schemas/RegoRulePublic'
             },
             type: 'array',
             title: 'Data'
@@ -553,7 +640,10 @@ export const CloudRulesPublicSchema = {
         }
     },
     type: 'object',
-    required: ['data', 'count'],
+    required: [
+        'data',
+        'count'
+    ],
     title: 'CloudRulesPublic'
 } as const;
 
@@ -648,7 +738,22 @@ export const CloudViolationPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'report_id', 'rule_id', 'platform', 'severity', 'category', 'analysis_type', 'message', 'resource_type', 'resource_name', 'resource_path', 'fix_hint', 'is_resolved', 'created_at'],
+    required: [
+        'id',
+        'report_id',
+        'rule_id',
+        'platform',
+        'severity',
+        'category',
+        'analysis_type',
+        'message',
+        'resource_type',
+        'resource_name',
+        'resource_path',
+        'fix_hint',
+        'is_resolved',
+        'created_at'
+    ],
     title: 'CloudViolationPublic'
 } as const;
 
@@ -656,7 +761,7 @@ export const CloudViolationsPublicSchema = {
     properties: {
         data: {
             items: {
-                '$ref': '#/components/schemas/CloudViolationPublic'
+                $ref: '#/components/schemas/CloudViolationPublic'
             },
             type: 'array',
             title: 'Data'
@@ -667,7 +772,10 @@ export const CloudViolationsPublicSchema = {
         }
     },
     type: 'object',
-    required: ['data', 'count'],
+    required: [
+        'data',
+        'count'
+    ],
     title: 'CloudViolationsPublic'
 } as const;
 
@@ -731,13 +839,29 @@ export const EnergyScorePublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'repository_id', 'report_id', 'energy_kwh', 'carbon_grams', 'grid_intensity_gco2_kwh', 'runner_region', 'score_breakdown', 'overall_score', 'grade', 'calculated_at'],
+    required: [
+        'id',
+        'repository_id',
+        'report_id',
+        'energy_kwh',
+        'carbon_grams',
+        'grid_intensity_gco2_kwh',
+        'runner_region',
+        'score_breakdown',
+        'overall_score',
+        'grade',
+        'calculated_at'
+    ],
     title: 'EnergyScorePublic'
 } as const;
 
 export const GitProviderSchema = {
     type: 'string',
-    enum: ['github', 'gitlab', 'bitbucket'],
+    enum: [
+        'github',
+        'gitlab',
+        'bitbucket'
+    ],
     title: 'GitProvider'
 } as const;
 
@@ -745,7 +869,7 @@ export const HTTPValidationErrorSchema = {
     properties: {
         detail: {
             items: {
-                '$ref': '#/components/schemas/ValidationError'
+                $ref: '#/components/schemas/ValidationError'
             },
             type: 'array',
             title: 'Detail'
@@ -769,7 +893,9 @@ export const MemberAddInSchema = {
         }
     },
     type: 'object',
-    required: ['user_id'],
+    required: [
+        'user_id'
+    ],
     title: 'MemberAddIn'
 } as const;
 
@@ -781,7 +907,9 @@ export const MessageSchema = {
         }
     },
     type: 'object',
-    required: ['message'],
+    required: [
+        'message'
+    ],
     title: 'Message'
 } as const;
 
@@ -799,7 +927,10 @@ export const NewPasswordSchema = {
         }
     },
     type: 'object',
-    required: ['token', 'new_password'],
+    required: [
+        'token',
+        'new_password'
+    ],
     title: 'NewPassword'
 } as const;
 
@@ -815,17 +946,18 @@ export const OAuthCodeExchangeSchema = {
         }
     },
     type: 'object',
-    required: ['code', 'redirect_uri'],
+    required: [
+        'code',
+        'redirect_uri'
+    ],
     title: 'OAuthCodeExchange',
-    description: `Body for both /exchange and /link — the authorization code + the exact
-redirect_uri used when opening the provider consent screen (required by
-most providers to validate the code exchange).`
+    description: 'Body for both /exchange and /link — the authorization code + the exact\nredirect_uri used when opening the provider consent screen (required by\nmost providers to validate the code exchange).'
 } as const;
 
 export const OAuthConnectionPublicSchema = {
     properties: {
         provider: {
-            '$ref': '#/components/schemas/GitProvider',
+            $ref: '#/components/schemas/GitProvider',
             maxLength: 50
         },
         provider_user_id: {
@@ -913,7 +1045,17 @@ export const OAuthConnectionPublicSchema = {
         }
     },
     type: 'object',
-    required: ['provider', 'provider_user_id', 'provider_username', 'id', 'user_id', 'instance_url', 'token_expires_at', 'created_at', 'updated_at'],
+    required: [
+        'provider',
+        'provider_user_id',
+        'provider_username',
+        'id',
+        'user_id',
+        'instance_url',
+        'token_expires_at',
+        'created_at',
+        'updated_at'
+    ],
     title: 'OAuthConnectionPublic'
 } as const;
 
@@ -921,7 +1063,7 @@ export const OAuthConnectionsPublicSchema = {
     properties: {
         data: {
             items: {
-                '$ref': '#/components/schemas/OAuthConnectionPublic'
+                $ref: '#/components/schemas/OAuthConnectionPublic'
             },
             type: 'array',
             title: 'Data'
@@ -932,7 +1074,10 @@ export const OAuthConnectionsPublicSchema = {
         }
     },
     type: 'object',
-    required: ['data', 'count'],
+    required: [
+        'data',
+        'count'
+    ],
     title: 'OAuthConnectionsPublic'
 } as const;
 
@@ -944,7 +1089,9 @@ export const OAuthExchangeResponseSchema = {
         }
     },
     type: 'object',
-    required: ['access_token'],
+    required: [
+        'access_token'
+    ],
     title: 'OAuthExchangeResponse'
 } as const;
 
@@ -956,7 +1103,9 @@ export const OAuthLinkResponseSchema = {
         }
     },
     type: 'object',
-    required: ['provider_username'],
+    required: [
+        'provider_username'
+    ],
     title: 'OAuthLinkResponse'
 } as const;
 
@@ -974,7 +1123,10 @@ export const OSSFixRequestInSchema = {
         }
     },
     type: 'object',
-    required: ['repository_id', 'violation_id'],
+    required: [
+        'repository_id',
+        'violation_id'
+    ],
     title: 'OSSFixRequestIn'
 } as const;
 
@@ -1001,7 +1153,7 @@ export const OSSFixRequestPublicSchema = {
             title: 'Requester User Id'
         },
         status: {
-            '$ref': '#/components/schemas/OSSRequestStatus'
+            $ref: '#/components/schemas/OSSRequestStatus'
         },
         queued_at: {
             type: 'string',
@@ -1044,13 +1196,28 @@ export const OSSFixRequestPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'repository_id', 'violation_id', 'requester_user_id', 'status', 'queued_at', 'processed_at', 'pr_url', 'position_in_queue'],
+    required: [
+        'id',
+        'repository_id',
+        'violation_id',
+        'requester_user_id',
+        'status',
+        'queued_at',
+        'processed_at',
+        'pr_url',
+        'position_in_queue'
+    ],
     title: 'OSSFixRequestPublic'
 } as const;
 
 export const OSSRequestStatusSchema = {
     type: 'string',
-    enum: ['queued', 'processing', 'completed', 'expired'],
+    enum: [
+        'queued',
+        'processing',
+        'completed',
+        'expired'
+    ],
     title: 'OSSRequestStatus'
 } as const;
 
@@ -1066,7 +1233,10 @@ export const OrgCreateInSchema = {
         }
     },
     type: 'object',
-    required: ['name', 'slug'],
+    required: [
+        'name',
+        'slug'
+    ],
     title: 'OrgCreateIn'
 } as const;
 
@@ -1098,7 +1268,13 @@ export const OrganizationMemberPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'organization_id', 'user_id', 'role', 'joined_at'],
+    required: [
+        'id',
+        'organization_id',
+        'user_id',
+        'role',
+        'joined_at'
+    ],
     title: 'OrganizationMemberPublic'
 } as const;
 
@@ -1129,19 +1305,33 @@ export const OrganizationPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'name', 'slug', 'created_by_user_id', 'created_at'],
+    required: [
+        'id',
+        'name',
+        'slug',
+        'created_by_user_id',
+        'created_at'
+    ],
     title: 'OrganizationPublic'
 } as const;
 
 export const PRSourceSchema = {
     type: 'string',
-    enum: ['cold_outreach', 'installed', 'oss_queue'],
+    enum: [
+        'cold_outreach',
+        'installed',
+        'oss_queue'
+    ],
     title: 'PRSource'
 } as const;
 
 export const PRStatusSchema = {
     type: 'string',
-    enum: ['open', 'merged', 'closed'],
+    enum: [
+        'open',
+        'merged',
+        'closed'
+    ],
     title: 'PRStatus'
 } as const;
 
@@ -1166,7 +1356,11 @@ export const PrivateUserCreateSchema = {
         }
     },
     type: 'object',
-    required: ['email', 'password', 'full_name'],
+    required: [
+        'email',
+        'password',
+        'full_name'
+    ],
     title: 'PrivateUserCreate'
 } as const;
 
@@ -1194,7 +1388,7 @@ export const RegoRulePublicSchema = {
             title: 'Category'
         },
         severity: {
-            '$ref': '#/components/schemas/ViolationSeverity'
+            $ref: '#/components/schemas/ViolationSeverity'
         },
         provider: {
             type: 'string',
@@ -1210,13 +1404,26 @@ export const RegoRulePublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'rule_id', 'name', 'description', 'category', 'severity', 'provider', 'enabled', 'rule_type'],
+    required: [
+        'id',
+        'rule_id',
+        'name',
+        'description',
+        'category',
+        'severity',
+        'provider',
+        'enabled',
+        'rule_type'
+    ],
     title: 'RegoRulePublic'
 } as const;
 
 export const RepoModeSchema = {
     type: 'string',
-    enum: ['cold_outreach', 'installed'],
+    enum: [
+        'cold_outreach',
+        'installed'
+    ],
     title: 'RepoMode'
 } as const;
 
@@ -1224,7 +1431,7 @@ export const RepositoriesPublicSchema = {
     properties: {
         data: {
             items: {
-                '$ref': '#/components/schemas/RepositoryWithScore'
+                $ref: '#/components/schemas/RepositoryWithScore'
             },
             type: 'array',
             title: 'Data'
@@ -1235,7 +1442,10 @@ export const RepositoriesPublicSchema = {
         }
     },
     type: 'object',
-    required: ['data', 'count'],
+    required: [
+        'data',
+        'count'
+    ],
     title: 'RepositoriesPublic'
 } as const;
 
@@ -1278,7 +1488,14 @@ export const RepositoryApiKeyPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'repository_id', 'name', 'is_active', 'created_at', 'last_used_at'],
+    required: [
+        'id',
+        'repository_id',
+        'name',
+        'is_active',
+        'created_at',
+        'last_used_at'
+    ],
     title: 'RepositoryApiKeyPublic'
 } as const;
 
@@ -1348,7 +1565,7 @@ export const RepositoryPublicSchema = {
             title: 'Github Webhook Id'
         },
         provider: {
-            '$ref': '#/components/schemas/GitProvider'
+            $ref: '#/components/schemas/GitProvider'
         },
         provider_repo_id: {
             anyOf: [
@@ -1366,7 +1583,7 @@ export const RepositoryPublicSchema = {
             title: 'Webhook Active'
         },
         mode: {
-            '$ref': '#/components/schemas/RepoMode'
+            $ref: '#/components/schemas/RepoMode'
         },
         poll_frequency_hours: {
             type: 'integer',
@@ -1405,7 +1622,27 @@ export const RepositoryPublicSchema = {
         }
     },
     type: 'object',
-    required: ['github_repo_id', 'full_name', 'name', 'owner_login', 'id', 'oauth_connection_id', 'github_webhook_id', 'provider', 'provider_repo_id', 'webhook_active', 'mode', 'poll_frequency_hours', 'pass_grade', 'pr_comments_enabled', 'status_checks_enabled', 'auto_pr_enabled', 'auto_pr_rules_excluded', 'created_at', 'updated_at'],
+    required: [
+        'github_repo_id',
+        'full_name',
+        'name',
+        'owner_login',
+        'id',
+        'oauth_connection_id',
+        'github_webhook_id',
+        'provider',
+        'provider_repo_id',
+        'webhook_active',
+        'mode',
+        'poll_frequency_hours',
+        'pass_grade',
+        'pr_comments_enabled',
+        'status_checks_enabled',
+        'auto_pr_enabled',
+        'auto_pr_rules_excluded',
+        'created_at',
+        'updated_at'
+    ],
     title: 'RepositoryPublic'
 } as const;
 
@@ -1431,7 +1668,12 @@ export const RepositoryRuleOverridePublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'repository_id', 'rule_id', 'enabled'],
+    required: [
+        'id',
+        'repository_id',
+        'rule_id',
+        'enabled'
+    ],
     title: 'RepositoryRuleOverridePublic'
 } as const;
 
@@ -1575,7 +1817,7 @@ export const RepositoryWithScoreSchema = {
             title: 'Github Webhook Id'
         },
         provider: {
-            '$ref': '#/components/schemas/GitProvider'
+            $ref: '#/components/schemas/GitProvider'
         },
         provider_repo_id: {
             anyOf: [
@@ -1593,7 +1835,7 @@ export const RepositoryWithScoreSchema = {
             title: 'Webhook Active'
         },
         mode: {
-            '$ref': '#/components/schemas/RepoMode'
+            $ref: '#/components/schemas/RepoMode'
         },
         poll_frequency_hours: {
             type: 'integer',
@@ -1665,7 +1907,27 @@ export const RepositoryWithScoreSchema = {
         }
     },
     type: 'object',
-    required: ['github_repo_id', 'full_name', 'name', 'owner_login', 'id', 'oauth_connection_id', 'github_webhook_id', 'provider', 'provider_repo_id', 'webhook_active', 'mode', 'poll_frequency_hours', 'pass_grade', 'pr_comments_enabled', 'status_checks_enabled', 'auto_pr_enabled', 'auto_pr_rules_excluded', 'created_at', 'updated_at'],
+    required: [
+        'github_repo_id',
+        'full_name',
+        'name',
+        'owner_login',
+        'id',
+        'oauth_connection_id',
+        'github_webhook_id',
+        'provider',
+        'provider_repo_id',
+        'webhook_active',
+        'mode',
+        'poll_frequency_hours',
+        'pass_grade',
+        'pr_comments_enabled',
+        'status_checks_enabled',
+        'auto_pr_enabled',
+        'auto_pr_rules_excluded',
+        'created_at',
+        'updated_at'
+    ],
     title: 'RepositoryWithScore',
     description: 'RepositoryPublic extended with the latest energy score summary.'
 } as const;
@@ -1682,7 +1944,10 @@ export const RuleOverrideInSchema = {
         }
     },
     type: 'object',
-    required: ['rule_id', 'enabled'],
+    required: [
+        'rule_id',
+        'enabled'
+    ],
     title: 'RuleOverrideIn'
 } as const;
 
@@ -1710,7 +1975,13 @@ export const ScoreHistoryPublicSchema = {
         }
     },
     type: 'object',
-    required: ['date', 'grade', 'overall_score', 'energy_kwh_total', 'carbon_grams_total'],
+    required: [
+        'date',
+        'grade',
+        'overall_score',
+        'energy_kwh_total',
+        'carbon_grams_total'
+    ],
     title: 'ScoreHistoryPublic'
 } as const;
 
@@ -1832,7 +2103,20 @@ export const TelemetryDataPointPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'repository_id', 'workflow_run_id', 'job_name', 'step_name', 'duration_seconds', 'runner_os', 'runner_arch', 'cpu_count', 'memory_mb', 'cache_hit', 'collected_at'],
+    required: [
+        'id',
+        'repository_id',
+        'workflow_run_id',
+        'job_name',
+        'step_name',
+        'duration_seconds',
+        'runner_os',
+        'runner_arch',
+        'cpu_count',
+        'memory_mb',
+        'cache_hit',
+        'collected_at'
+    ],
     title: 'TelemetryDataPointPublic'
 } as const;
 
@@ -1983,7 +2267,9 @@ export const TokenSchema = {
         }
     },
     type: 'object',
-    required: ['access_token'],
+    required: [
+        'access_token'
+    ],
     title: 'Token'
 } as const;
 
@@ -2003,7 +2289,11 @@ export const TriggerDynamicResponseSchema = {
         }
     },
     type: 'object',
-    required: ['report_id', 'task_id', 'message'],
+    required: [
+        'report_id',
+        'task_id',
+        'message'
+    ],
     title: 'TriggerDynamicResponse'
 } as const;
 
@@ -2023,13 +2313,21 @@ export const TriggerStaticResponseSchema = {
         }
     },
     type: 'object',
-    required: ['report_id', 'task_id', 'message'],
+    required: [
+        'report_id',
+        'task_id',
+        'message'
+    ],
     title: 'TriggerStaticResponse'
 } as const;
 
 export const TriggerTypeSchema = {
     type: 'string',
-    enum: ['webhook', 'manual', 'periodic'],
+    enum: [
+        'webhook',
+        'manual',
+        'periodic'
+    ],
     title: 'TriggerType'
 } as const;
 
@@ -2049,7 +2347,10 @@ export const UpdatePasswordSchema = {
         }
     },
     type: 'object',
-    required: ['current_password', 'new_password'],
+    required: [
+        'current_password',
+        'new_password'
+    ],
     title: 'UpdatePassword'
 } as const;
 
@@ -2091,7 +2392,10 @@ export const UserCreateSchema = {
         }
     },
     type: 'object',
-    required: ['email', 'password'],
+    required: [
+        'email',
+        'password'
+    ],
     title: 'UserCreate'
 } as const;
 
@@ -2144,7 +2448,10 @@ export const UserPublicSchema = {
         }
     },
     type: 'object',
-    required: ['email', 'id'],
+    required: [
+        'email',
+        'id'
+    ],
     title: 'UserPublic'
 } as const;
 
@@ -2176,7 +2483,10 @@ export const UserRegisterSchema = {
         }
     },
     type: 'object',
-    required: ['email', 'password'],
+    required: [
+        'email',
+        'password'
+    ],
     title: 'UserRegister'
 } as const;
 
@@ -2271,7 +2581,7 @@ export const UsersPublicSchema = {
     properties: {
         data: {
             items: {
-                '$ref': '#/components/schemas/UserPublic'
+                $ref: '#/components/schemas/UserPublic'
             },
             type: 'array',
             title: 'Data'
@@ -2282,7 +2592,10 @@ export const UsersPublicSchema = {
         }
     },
     type: 'object',
-    required: ['data', 'count'],
+    required: [
+        'data',
+        'count'
+    ],
     title: 'UsersPublic'
 } as const;
 
@@ -2319,7 +2632,11 @@ export const ValidationErrorSchema = {
         }
     },
     type: 'object',
-    required: ['loc', 'msg', 'type'],
+    required: [
+        'loc',
+        'msg',
+        'type'
+    ],
     title: 'ValidationError'
 } as const;
 
@@ -2371,10 +2688,10 @@ export const VerdexPullRequestPublicSchema = {
             title: 'Title'
         },
         status: {
-            '$ref': '#/components/schemas/PRStatus'
+            $ref: '#/components/schemas/PRStatus'
         },
         source: {
-            '$ref': '#/components/schemas/PRSource'
+            $ref: '#/components/schemas/PRSource'
         },
         fork_full_name: {
             anyOf: [
@@ -2411,7 +2728,21 @@ export const VerdexPullRequestPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'repository_id', 'report_id', 'provider_pr_number', 'provider_pr_url', 'branch_name', 'title', 'status', 'source', 'fork_full_name', 'fix_ids', 'created_at', 'closed_at'],
+    required: [
+        'id',
+        'repository_id',
+        'report_id',
+        'provider_pr_number',
+        'provider_pr_url',
+        'branch_name',
+        'title',
+        'status',
+        'source',
+        'fork_full_name',
+        'fix_ids',
+        'created_at',
+        'closed_at'
+    ],
     title: 'VerdexPullRequestPublic'
 } as const;
 
@@ -2432,7 +2763,7 @@ export const ViolationPublicSchema = {
             title: 'Rule Id'
         },
         severity: {
-            '$ref': '#/components/schemas/ViolationSeverity'
+            $ref: '#/components/schemas/ViolationSeverity'
         },
         category: {
             type: 'string',
@@ -2486,13 +2817,29 @@ export const ViolationPublicSchema = {
         }
     },
     type: 'object',
-    required: ['id', 'report_id', 'rule_id', 'severity', 'category', 'message', 'job_name', 'workflow_file', 'fix_hint', 'is_resolved', 'created_at'],
+    required: [
+        'id',
+        'report_id',
+        'rule_id',
+        'severity',
+        'category',
+        'message',
+        'job_name',
+        'workflow_file',
+        'fix_hint',
+        'is_resolved',
+        'created_at'
+    ],
     title: 'ViolationPublic'
 } as const;
 
 export const ViolationSeveritySchema = {
     type: 'string',
-    enum: ['info', 'warning', 'error'],
+    enum: [
+        'info',
+        'warning',
+        'error'
+    ],
     title: 'ViolationSeverity'
 } as const;
 
@@ -2500,7 +2847,7 @@ export const ViolationsPublicSchema = {
     properties: {
         data: {
             items: {
-                '$ref': '#/components/schemas/ViolationPublic'
+                $ref: '#/components/schemas/ViolationPublic'
             },
             type: 'array',
             title: 'Data'
@@ -2511,6 +2858,9 @@ export const ViolationsPublicSchema = {
         }
     },
     type: 'object',
-    required: ['data', 'count'],
+    required: [
+        'data',
+        'count'
+    ],
     title: 'ViolationsPublic'
 } as const;
