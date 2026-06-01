@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@hey-api/openapi-ts": "0.97.1",
+    "@hey-api/openapi-ts": "0.98.0",
     "@vercel/ncc": "^0.38.1",
     "eslint": "^10.3.0",
     "jest": "^30.4.2",
